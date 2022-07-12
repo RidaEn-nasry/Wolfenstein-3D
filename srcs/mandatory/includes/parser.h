@@ -32,6 +32,6 @@ typedef struct s_map {
 
 
 
-bool	isIdentifier(char *line);
-bool	isMap(char *line);
+bool	is_identifier(char *line);
+bool	is_map(char *line);
 #endif
