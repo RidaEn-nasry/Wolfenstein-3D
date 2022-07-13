@@ -16,5 +16,6 @@
 # include <parser.h>
 
 void	exit_free_if(int cond, char *msg, t_map *map);
+t_map   *validate_map(char *map_file);
 
 #endif

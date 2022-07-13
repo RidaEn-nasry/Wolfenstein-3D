@@ -42,14 +42,13 @@ bool	is_map(char *line)
 	size_t	i;
 
 	i = 0;
-	printf("len: %lu\n", ft_strlen(line));
-	while (i < ft_strlen(line) - 1)
+	while (i < ft_strlen(line))
 	{
 		while (ft_isspace(line[i]))
 			i++;
 		if (line[i] != '0' && line[i] != '1' && line[i] != 'S' && \
 		line[i] != 'E' && line[i] != 'W' && line[i] != 'N')
-			return (false);
+			return (false);	
 		i++;
 	}
 	return (true);

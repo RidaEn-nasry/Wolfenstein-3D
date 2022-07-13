@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 09:13:47 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/10 17:34:13 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/13 13:29:01 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,26 @@
 # include <stdio.h>
 
 
+typedef	struct s_textures {
+	char			*north;
+	char			*south;
+	char			*east;
+	char			*west;
+} t_textures;
+
+typedef struct s_colors {
+	int			ceiling_color;
+	int			floor_color;
+} t_colors;
+
+
 typedef struct s_map {
 	unsigned long		width;
 	unsigned long		height;
 	char			**map;
-	int			ceiling_color;
-	int			floor_color;
-	char			*north_texture;
-	char			*south_texture;
-	char			*east_texture;
-	char			*west_texture;
+	t_colors		*clr;
+	t_textures		*txtr;
 }t_map;
-
-
 
 
 bool	is_identifier(char *line);
