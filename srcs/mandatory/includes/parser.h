@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 09:13:47 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/13 13:29:01 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/13 17:34:18 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 
 
+
 typedef	struct s_textures {
 	char			*north;
 	char			*south;
@@ -25,8 +26,8 @@ typedef	struct s_textures {
 } t_textures;
 
 typedef struct s_colors {
-	int			ceiling_color;
-	int			floor_color;
+	int			ceiling;
+	int			floor;
 } t_colors;
 
 

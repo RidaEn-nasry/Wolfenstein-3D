@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:44:15 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/07 11:45:35 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/13 21:51:04 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,6 @@
 
 void	exit_free_if(int cond, char *msg, t_map *map);
 t_map   *validate_map(char *map_file);
+
 
 #endif

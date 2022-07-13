@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 21:17:08 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/12 15:44:21 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/13 20:36:52 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ bool	is_map(char *line)
 	size_t	i;
 
 	i = 0;
-	while (i < ft_strlen(line))
+	while (i < ft_strlen(line) - 1)
 	{
 		while (ft_isspace(line[i]))
 			i++;
