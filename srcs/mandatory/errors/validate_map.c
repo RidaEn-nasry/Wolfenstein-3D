@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:59:26 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/13 23:35:33 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/14 10:27:40 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,13 +104,14 @@ bool	map_is_last( char *map_file) {
 	return (true);	
 };
 
-
 t_map	*get_map( int fd, t_map *map) {
 	char	*line;
 	bool	prev_isempty;
-	
+	int		height;
+		
 	line = get_next_line(fd);
 	prev_isempty = false;
+	height = 1;
 	while (line)
 	{
 		if (ft_isempty(line))
@@ -125,10 +126,13 @@ t_map	*get_map( int fd, t_map *map) {
 		{
 			exit_free_if(line[0] != '1' || line[ft_strlen(line) - 2] != '1', "Error:\n\tmap should be surrounded by walls", map);
 			map->map = ft_2darr_add(map->map, ft_substr(line, 0, ft_strlen(line) - 1));	
+			height++;
 		}
 		free(line);
 		line = get_next_line(fd);
 	}
+	map->height = height;
+	map->width = ft_strlen(map->map[0]);
 	return (map);
 }
 
@@ -175,11 +179,3 @@ t_map	*validate_map( char *map_file ) {
 	return (map);
 }
 
-
-int main( void ) {
-	char *map_file = "./resources/maps/map.cub";
-	t_map *map = validate_map(map_file);
-	(void)map;
-	
-	return (0);
-} 
