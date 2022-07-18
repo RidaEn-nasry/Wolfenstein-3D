@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 10:11:27 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/18 21:32:14 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/18 22:40:39 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,14 @@ void	draw_rect(t_map *map)
 {
 	int	x = map->rndr->pvec->x + 10;
 	int	y = map->rndr->pvec->y + 10;
+	char	*c;
 	for (int i = map->rndr->pvec->y; i < y; i++)
 	{
 		for (int j = map->rndr->pvec->x; j < x; j++)
-			mlx_pixel_put(map->mlx->mlx, map->mlx->win, j, i, 0xFF0000);
+		{
+			c = map->mlx->data + (i * map->mlx->size_line + j * (map->mlx->bpp / 8)); 
+			*(int *)c = map->clr->floor;
+		}
 	}
 	map->rndr->pvec->x += 10;
 	map->rndr->pvec->y += 10;
@@ -58,19 +62,19 @@ t_map   *init_rndr(t_map *map)
 {
 
 	exit_free_if(!(map->mlx = malloc(sizeof(*map->mlx))), "Error:\n\tmalloc failed", map);
-	exit_free_if(!((map->mlx->mlx = mlx_init()) == NULL), "Error:\n\tmlx failed", map);
-	exit_free_if(!(map->mlx->win = mlx_new_window(map->mlx->mlx, WIDTH, HEIGHT, "wolfenstein 3d")), "Error:\n\tmlx failed", map);
-	exit_free_if(!(map->mlx->img = mlx_new_image(map->mlx->mlx, WIDTH, HEIGHT), "Error:\n\tmlx failed", map));
-
+	exit_free_if(!(map->mlx->mlx = mlx_init()), "Error:\n\tmlx initilization failed", map);
+	exit_free_if(!(map->mlx->win = mlx_new_window(map->mlx->mlx, WIDTH, HEIGHT, "wolfenstein 3d")), "Error:\n\tmlx window creation failed", map);
+	exit_free_if(!(map->mlx->img = mlx_new_image(map->mlx->mlx, WIDTH, HEIGHT)), "Error:\n\tmlx image creation failed", map);
 	map->mlx->bpp = 32;
-	map->mlx->size_line = 
-	exit_free_if((map->rndr = malloc(sizeof(*map->rndr))) == NULL, "Error:\n\tmalloc failed", map);
-	exit_free_if((map->rndr->pvec = malloc(sizeof(*map->rndr->pvec))) == NULL, "Error:\n\tmalloc failed", map);
-
-	exit_free_if((map->rndr->dvec = malloc(sizeof(*map->rndr->dvec))) == NULL, "Error:\n\tmalloc failed", map);
-	exit_free_if((map->rndr->cvec = malloc(sizeof(*map->rndr->cvec))) == NULL, "Error:\n\tmalloc failed", map);
-	map->rndr->pvec->x = 500;
-	map->rndr->pvec->y = 100;
+	map->mlx->size_line = WIDTH * 4;
+	map->mlx->endian = 0;
+	map->mlx->data = mlx_get_data_addr(map->mlx->win, &map->mlx->bpp, &map->mlx->size_line, &map->mlx->endian);
+	exit_free_if(!(map->rndr = malloc(sizeof(*map->rndr))), "Error:\n\tmalloc failed", map);
+	exit_free_if(!(map->rndr->pvec = malloc(sizeof(*map->rndr->pvec))), "Error:\n\tmalloc failed", map);
+	exit_free_if(!(map->rndr->dvec = malloc(sizeof(*map->rndr->dvec))), "Error:\n\tmalloc failed", map);
+	exit_free_if(!(map->rndr->cvec = malloc(sizeof(*map->rndr->cvec))), "Error:\n\tmalloc failed", map);
+	map->rndr->pvec->x = 0;
+	map->rndr->pvec->y = 0;
 	map->clr->floor = 0xFF0000;
 	
 	/*
@@ -86,10 +90,9 @@ t_map   *init_rndr(t_map *map)
 
 void    render_map(t_map *map)
 {
-	map = init_rndr(map);
-
-
+		map = init_rndr(map);
 		draw_rect(map);
+		mlx_put_image_to_window(map->mlx->mlx, map->mlx->win, map->mlx->img, 0, 0);
 		mlx_clear_window(map->mlx->mlx, map->mlx->win);
 		mlx_loop(map->mlx->mlx);
 }
