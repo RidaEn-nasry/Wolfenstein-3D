@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 08:20:10 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/15 11:17:18 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/17 17:25:26 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,5 @@
 
 void    renderer(t_map *map);
 void    render_map(t_map *map);
-void    draw_line(int x1, int y1, int x2, int y2, int c, t_map *map);
-
+void    rasterize_vector(int x1, int y1, int x2, int y2, int c, t_map *map);
 #endif

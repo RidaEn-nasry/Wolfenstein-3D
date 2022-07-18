@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:59:26 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/14 10:27:40 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/18 13:48:19 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,8 @@ t_map	*get_map( int fd, t_map *map) {
 		free(line);
 		line = get_next_line(fd);
 	}
-	map->height = height;
-	map->width = ft_strlen(map->map[0]);
+	map->h = height;
+	map->w = ft_strlen(map->map[0]);
 	return (map);
 }
 

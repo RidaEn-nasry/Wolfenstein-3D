@@ -17,7 +17,6 @@ void    renderer(t_map *map)
     exit_free_if(!map->mlx->img, "Error\n\tmlx image creation failed", map);
     mlx_put_image_to_window(map->mlx->mlx, map->mlx->win, map->mlx->img, 0, 0);
     render_map(map);
-    mlx_loop(map->mlx->mlx);
 
     return ;
 }

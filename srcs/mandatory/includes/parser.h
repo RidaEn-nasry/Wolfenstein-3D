@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 09:13:47 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/14 17:54:24 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/18 13:47:40 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,19 @@
 
 
 
+typedef struct	s_vector {
+	double	x;
+	double	y;
+}	t_vector;
 
-// 
 typedef struct s_render {
-	int	fov;
-	int	render_delay;
-	double pos_x;
-	double pos_y;
-	int	p_angle;
-	int	ray_incr;
-	int	ray_prec;
-} t_render;
+	t_vector	*pvec;
+	t_vector	*dvec;
+	t_vector	*cvec;
+	int		fov;
+	int		time;
+	int		old_time;
+}	t_render;
 
 // minilibx struct
 typedef struct s_mlx {
@@ -61,8 +63,8 @@ typedef struct s_colors {
 
 // The grand struct
 typedef struct s_map {
-	unsigned long		width;
-	unsigned long		height;
+	unsigned long		w;
+	unsigned long		h;
 	char			**map;
 	t_colors		*clr;
 	t_textures		*txtr;

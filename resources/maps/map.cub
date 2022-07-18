@@ -1,8 +1,8 @@
 
-SO /Users/ren-nasr/Wolfenstein-3D/resources/textures/example.xpm
-NO /Users/ren-nasr/Wolfenstein-3D/resources/textures/example.xpm
-WE /Users/ren-nasr/Wolfenstein-3D/resources/textures/example.xpm
-EA /Users/ren-nasr/Wolfenstein-3D/resources/textures/example.xpm
+SO ./resources/textures/example.xpm
+NO ./resources/textures/example.xpm
+WE ./resources/textures/example.xpm
+EA ./resources/textures/example.xpm
 
 F 255,100,0
 C 100,23,33

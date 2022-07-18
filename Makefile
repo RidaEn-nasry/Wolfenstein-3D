@@ -11,25 +11,32 @@ SRCS = $(MNDTR_PATH)/errors/validate_map.c\
 
 RM = rm -rf
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g  -mmacosx-version-min=10.15 -arch arm64
 OBJS = $(SRCS:.c=.o)
 INCS = -I$(MNDTR_PATH)/includes/ -I./srcs/utils/libft/
 INCLDS = $(MNDTR_PATH)/includes/parser.h $(MNDTR_PATH)/includes/errors.h $(MNDTR_PATH)/includes/renderer.h 
 LIBFT_PATH = ./srcs/utils/libft/
+MINLBX_PATH = ./srcs/utils/minilibx/
+
+
 MLX = -L/usr/local/lib -lmlx -framework OpenGL -framework AppKit
+#MLX = $(wildcard $(MINLBX_PATH)*)
 MLX_INC = -I/usr/local/include/
 %.o: %.c 
 	$(CC) $(CFLAGS) $(INCS) $(MLX_INC) -c $< -o $@
 
 
 $(NAME): $(OBJS) $(INCLDS)
-	$(MAKE) -C $(LIBFT_PATH)  
+	$(MAKE) -C $(LIBFT_PATH)
+	$(MAKE) -C $(MINLBX_PATH)
 	$(CC) $(OBJS) $(LIBFT_PATH)/libft.a $(MLX) -o  $@
 
-
+run: $(NAME)
+	./$(NAME) ./resources/maps/map.cub
 
 clean:
 	$(MAKE) -C $(LIBFT_PATH) clean
+	$(MAKE) -C $(MINLBX_PATH) clean
 	$(RM) $(OBJS)
 
 fclean: clean

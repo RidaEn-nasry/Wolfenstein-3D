@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 10:11:27 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/15 11:17:53 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/18 21:32:14 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@
  * @param map the struct that contains the map to render
  */
 
-
 /**
+
+
  * Cube(wall) size is 64x64x64
  * walls are always 90 degrees to the floor
  *  floor is always flat 
@@ -28,28 +29,68 @@
  * 
  */
 
-#define SQUARE_SIZE 100
 
+void	cast_rays() {/*cast all rays here*/}
+
+
+
+void	move_ply(t_map *map)
+{
+	map->rndr->pvec->x += 1;
+	map->rndr->pvec->y += 1;
+}
+
+
+void	draw_rect(t_map *map)
+{
+	int	x = map->rndr->pvec->x + 10;
+	int	y = map->rndr->pvec->y + 10;
+	for (int i = map->rndr->pvec->y; i < y; i++)
+	{
+		for (int j = map->rndr->pvec->x; j < x; j++)
+			mlx_pixel_put(map->mlx->mlx, map->mlx->win, j, i, 0xFF0000);
+	}
+	map->rndr->pvec->x += 10;
+	map->rndr->pvec->y += 10;
+}
 
 t_map   *init_rndr(t_map *map)
 {
-    map->rndr = malloc(sizeof(*map->rndr));
-    map->rndr->fov = 60;
-    map->rndr->render_delay = 30;
-    map->rndr->pos_x = 2;
-    map->rndr->pos_y = 2;
-    map->rndr->p_angle = 90;
-    map->rndr->ray_incr = (map->rndr->fov / WIDTH);
-    map->rndr->ray_prec = 64;
-    return (map);
-}
 
+	exit_free_if(!(map->mlx = malloc(sizeof(*map->mlx))), "Error:\n\tmalloc failed", map);
+	exit_free_if(!((map->mlx->mlx = mlx_init()) == NULL), "Error:\n\tmlx failed", map);
+	exit_free_if(!(map->mlx->win = mlx_new_window(map->mlx->mlx, WIDTH, HEIGHT, "wolfenstein 3d")), "Error:\n\tmlx failed", map);
+	exit_free_if(!(map->mlx->img = mlx_new_image(map->mlx->mlx, WIDTH, HEIGHT), "Error:\n\tmlx failed", map));
+
+	map->mlx->bpp = 32;
+	map->mlx->size_line = 
+	exit_free_if((map->rndr = malloc(sizeof(*map->rndr))) == NULL, "Error:\n\tmalloc failed", map);
+	exit_free_if((map->rndr->pvec = malloc(sizeof(*map->rndr->pvec))) == NULL, "Error:\n\tmalloc failed", map);
+
+	exit_free_if((map->rndr->dvec = malloc(sizeof(*map->rndr->dvec))) == NULL, "Error:\n\tmalloc failed", map);
+	exit_free_if((map->rndr->cvec = malloc(sizeof(*map->rndr->cvec))) == NULL, "Error:\n\tmalloc failed", map);
+	map->rndr->pvec->x = 500;
+	map->rndr->pvec->y = 100;
+	map->clr->floor = 0xFF0000;
+	
+	/*
+	 *map->rndr->dvec->x = -1;
+	 *map->rndr->dvec->y = 0;
+	 *map->rndr->cvec->x = 0;
+	 *map->rndr->cvec->y = 0.66;
+	 *map->rndr->time = 0;
+	 *map->rndr->old_time = 0;
+	 */
+	return (map);
+}
 
 void    render_map(t_map *map)
 {
-    draw_line(1, 2, 44, 56, 0xFF0000, map);
-    // map = init_rndr(map);
-     
-}
+	map = init_rndr(map);
 
+
+		draw_rect(map);
+		mlx_clear_window(map->mlx->mlx, map->mlx->win);
+		mlx_loop(map->mlx->mlx);
+}
 
