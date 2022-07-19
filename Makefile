@@ -9,7 +9,10 @@ SRCS = $(MNDTR_PATH)/errors/validate_map.c\
 		$(MNDTR_PATH)/renderer/render_map.c\
 		$(MNDTR_PATH)/renderer/math_utils.c\
 		$(MNDTR_PATH)/renderer/init.c\
-		$(MNDTR_PATH)/renderer/mlx_utils.c
+		$(MNDTR_PATH)/renderer/mlx_utils.c\
+		$(MNDTR_PATH)/renderer/shape_drawers.c\
+		$(MNDTR_PATH)/renderer/game_drawers.c\
+		$(MNDTR_PATH)/renderer/moves.c\
 
 RM = rm -rf
 CC = gcc
