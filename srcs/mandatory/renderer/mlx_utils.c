@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   math_utils.c                                       :+:      :+:    :+:   */
+/*   mlx_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ren-nasr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/14 17:43:40 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/19 10:55:01 by ren-nasr         ###   ########.fr       */
+/*   Created: 2022/07/19 10:30:07 by ren-nasr          #+#    #+#             */
+/*   Updated: 2022/07/19 11:39:07 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <renderer.h>
 
-double  degtorad(double degree)
+void	put_pix_to_img(t_map *map, int x, int y, int clr)
 {
-    return (degree * M_PI / 180);  
+	char	*pixel;
+
+	pixel = map->mlx->img_data + (y * map->mlx->size_line + x * (map->mlx->bpp / 8));
+	*(unsigned int *)pixel = clr;
 }
 
-void    rasterize_vector(int x1, int y1, int x2, int y2, int c, t_map *map)
-{
-	(void)map;
-	(void)x1;
-	(void)y1;
-	(void)x2;
-	(void)y2;
-	(void)c;
-}
+

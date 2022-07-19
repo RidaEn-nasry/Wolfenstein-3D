@@ -7,7 +7,9 @@ SRCS = $(MNDTR_PATH)/errors/validate_map.c\
 		$(MNDTR_PATH)/parser/parser.c\
 		$(MNDTR_PATH)/renderer/renderer.c\
 		$(MNDTR_PATH)/renderer/render_map.c\
-		$(MNDTR_PATH)/renderer/math_utils.c
+		$(MNDTR_PATH)/renderer/math_utils.c\
+		$(MNDTR_PATH)/renderer/init.c\
+		$(MNDTR_PATH)/renderer/mlx_utils.c
 
 RM = rm -rf
 CC = gcc

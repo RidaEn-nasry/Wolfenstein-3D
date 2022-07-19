@@ -1,0 +1,53 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ren-nasr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/19 10:51:31 by ren-nasr          #+#    #+#             */
+/*   Updated: 2022/07/19 11:22:08 by ren-nasr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
+#include <renderer.h>
+
+t_map   *init_rndr(t_map *map)
+{
+	exit_free_if(!(map->rndr = malloc(sizeof(*map->rndr))), "Error:\n\tmalloc failed", map);
+	exit_free_if(!(map->rndr->pvec = malloc(sizeof(*map->rndr->pvec))), "Error:\n\tmalloc failed", map);
+	
+	map->rndr->pvec->x = WIDTH / 2;
+	map->rndr->pvec->y = HEIGHT / 2;
+	map->rndr->turn_dir = 0;
+	map->rndr->walk_dir = 0;
+	map->rndr->rot_angl = M_PI / 2;
+	map->rndr->walk_spd = 100;
+	map->rndr->turn_spd = degtorad(45);
+	map->clr->floor = 0xFF0000;
+	map = init_mlx(map);	
+	return (map);
+}
+
+t_map	*new_img(t_map *map)
+{
+	ft_sfree(map->mlx->img);
+	exit_free_if(!(map->mlx->img = mlx_new_image(map->mlx->mlx, WIDTH, HEIGHT)), "Error:\n\tmlx image creation failed", map);
+	map->mlx->bpp = 32;
+	map->mlx->size_line = WIDTH * 4;
+	map->mlx->endian = 0;
+	map->mlx->img_data = mlx_get_data_addr(map->mlx->img, &map->mlx->bpp, &map->mlx->size_line, &map->mlx->endian);
+	return (map);
+}
+
+t_map	*init_mlx(t_map	*map)
+{
+	exit_free_if(!(map->mlx = malloc(sizeof(*map->mlx))), "Error:\n\tmalloc failed", map);
+	exit_free_if(!(map->mlx->mlx = mlx_init()), "Error:\n\tmlx initilization failed", map);
+	exit_free_if(!(map->mlx->win = mlx_new_window(map->mlx->mlx, WIDTH, HEIGHT, "wolfenstein 3d")), "Error:\n\tmlx window creation failed", map);
+	map = new_img(map);
+	return (map);
+}
+
+

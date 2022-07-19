@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 09:13:47 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/18 13:47:40 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/19 11:18:03 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 # include <stdio.h>
 
 
-
-
 typedef struct	s_vector {
 	double	x;
 	double	y;
@@ -26,11 +24,12 @@ typedef struct	s_vector {
 
 typedef struct s_render {
 	t_vector	*pvec;
-	t_vector	*dvec;
-	t_vector	*cvec;
 	int		fov;
-	int		time;
-	int		old_time;
+	int		turn_dir; // 0 neutral, -1 left, +1 right
+	int		walk_dir; // 0 neutrak, -1 back, +1 front
+	double		rot_angl;
+	double		walk_spd;
+	double		turn_spd;
 }	t_render;
 
 // minilibx struct
@@ -38,7 +37,7 @@ typedef struct s_mlx {
 	void	*mlx;
 	void	*win;
 	void	*img;
-	char	*data;
+	char	*img_data;
 	int		bpp;
 	int		size_line;
 	int		endian;
@@ -52,13 +51,11 @@ typedef	struct s_textures {
 	char			*west;
 } t_textures;
 
-
 // Colors
 typedef struct s_colors {
 	int			ceiling;
 	int			floor;
 } t_colors;
-
 
 
 // The grand struct
