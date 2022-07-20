@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 08:20:10 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/19 18:44:39 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/20 11:49:23 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <parser.h>
 # include <errors.h>
 # include <math.h>
-
+# include <stdlib.h>
 # define HEIGHT 1080
 # define WIDTH 1920
 # define RAYS WIDTH 
@@ -30,8 +30,8 @@
 // key codes
 # define UP 13   
 # define DOWN 1 
-# define RIGHT 2 
-# define LEFT 0
+# define RIGHT 124
+# define LEFT 123
 # define EXIT 53
 
 void    renderer(t_map *map);
@@ -60,5 +60,5 @@ void	draw_line(t_map *map);
 
 // moves
 int	move_player(int key_code, t_map *map);
-
+void	update_ang(t_map *map);
 #endif

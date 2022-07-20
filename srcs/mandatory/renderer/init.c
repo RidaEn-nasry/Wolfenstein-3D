@@ -6,7 +6,7 @@
 /*   By: ren-nasr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:51:31 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/19 15:55:16 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/20 17:31:44 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ t_map   *init_rndr(t_map *map)
 	map->rndr->turn_dir = 0;
 	map->rndr->walk_dir = 0;
 	map->rndr->rot_angl = M_PI / 2;
-	map->rndr->walk_spd = 100;
-	map->rndr->turn_spd = degtorad(45);
+	map->rndr->walk_spd = 5;
+	map->rndr->turn_spd = degtorad(10);
 	map->clr->floor = 0xFF0000;
-	map = init_mlx(map);	
+	map = init_mlx(map);
 	return (map);
 }
 
