@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 14:09:17 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/20 22:00:51 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/21 16:29:57 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	update_pos(double *x, double *y, t_map *map)
 
 void	update_ang(t_map *map) 
 {
-	printf("turn direction: %f\n", map->rndr->rot_angl);
+	
 	map->rndr->rot_angl += (map->rndr->turn_dir * map->rndr->turn_spd);
 }
 

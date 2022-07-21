@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 13:43:12 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/20 22:07:05 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/21 21:04:53 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,16 @@
 
 void	draw_player(t_map *map)
 {
-	draw_rect(map);
 	cast_rays(map);
+	draw_rect(map);
 }
 
 void	draw_map(t_map *map, int flag) {
 	int	x;
 	int	y;
+	bool	p;
 
+	p = false;
 	x = 0;  
 	y = 0;
 	for (int i = 0; map->map[i]; i++)
@@ -35,15 +37,15 @@ void	draw_map(t_map *map, int flag) {
 				draw_square(map, x , y, 0xFFFFFFF);
 			if (map->map[i][j] == 'N' && !flag)
 			{
-				map->rndr->pvec->x = x ;
-				map->rndr->pvec->y = y ;
-				draw_player(map);
+				p = true;
+				map->rndr->pvec->x = x;
+				map->rndr->pvec->y = y;
 			}			
 			x += CELL_SIZE;
 		}
 		y += CELL_SIZE;
 	}
-	if (flag == 1)
+	if (flag == 1 || p == true)
 		draw_player(map);
 }
 

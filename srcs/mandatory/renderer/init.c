@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:51:31 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/21 01:14:05 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/21 21:26:36 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,14 @@ t_map   *init_rndr(t_map *map)
 	exit_free_if(!(map->rndr = malloc(sizeof(*map->rndr))), "Error:\n\tmalloc failed", map);
 	exit_free_if(!(map->rndr->pvec = malloc(sizeof(*map->rndr->pvec))), "Error:\n\tmalloc failed", map);
 	exit_free_if(!(map->rndr->wall = malloc(sizeof(*map->rndr->wall))), "Error:\n\tmalloc failed", map);
-	map->rndr->wall->wallx = 0;
-	map->rndr->wall->wally = 0;
-	map->rndr->wall->dist = 0;
-	map->rndr->wall->stepx = 0;
-	map->rndr->wall->stepy= 0;
+	exit_free_if(!(map->rndr->wall->wall = malloc(sizeof(*map->rndr->wall->wall))),  "Error:\n\tmalloc failed", map);
+	exit_free_if(!(map->rndr->wall->step = malloc(sizeof(*map->rndr->wall->step))),  "Error:\n\tmalloc failed", map);
+	map->rndr->wall->wall->x = 0;
+	map->rndr->wall->wall->y = 0;
+	map->rndr->wall->step->x = 0;
+	map->rndr->wall->step->y = 0;
+
+	
 
 	
 	/*map->rndr->pvec->y = 1;*/

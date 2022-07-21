@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 09:13:47 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/21 01:22:08 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/21 15:06:29 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,22 @@
 
 # include <libft.h>
 # include <stdio.h>
-
-typedef	struct	s_wall {
-	double	wallx;
-	double	wally;
-	double	dist;
-	long	stepx;
-	long	stepy;
-	bool	found_h;
-} t_wall;
-
 typedef struct	s_vector {
 	double	x;
 	double	y;
 }	t_vector;
+
+
+
+typedef	struct	s_wall {
+	t_vector	*wall;
+	// t_vector	*wallv;
+	t_vector	*step;
+	// double	dist;
+	// bool	found_h;
+	// bool	found_v;
+} t_wall;
+
 
 typedef struct s_render {
 	t_vector	*pvec;
@@ -38,7 +40,8 @@ typedef struct s_render {
 	double		rot_angl;
 	double		walk_spd;
 	double		turn_spd;
-	t_wall		*wall;	
+	double		dist;
+	t_wall		*wall;
 }	t_render;
 
 // minilibx struct

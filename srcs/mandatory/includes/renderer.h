@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 08:20:10 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/20 23:36:10 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/21 15:42:02 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <errors.h>
 # include <math.h>
 # include <stdlib.h>
+#include <limits.h>
 # define HEIGHT 1080
 # define WIDTH 1920
 # define RAYS WIDTH 
