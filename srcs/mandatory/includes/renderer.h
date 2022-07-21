@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 08:20:10 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/21 15:42:02 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/22 00:07:21 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,11 @@
 # include <stdlib.h>
 #include <limits.h>
 # define HEIGHT 1080
-# define WIDTH 1920
-# define RAYS WIDTH 
-# define SCL_FAC 1
-# define CELL_SIZE (64 * SCL_FAC)
-# define SPEED 8
-# define PLY_SIZE 16
+# define WIDTH 1920 
+# define SCL_FAC 0.4
+# define CELL_SIZE 18
+# define SPEED 2
+# define PLY_SIZE 6
 # define NUM_RAYS WIDTH / 2
 // key codes
 # define UP 13   
@@ -53,7 +52,7 @@ void	put_pix_to_img(t_map *map, int x, int y, int clr);
 
 
 // drawers 
-void	draw_rect(t_map *map);
+void	draw_rect(t_map *map, double x, double y, int height, int width);
 void	draw_square(t_map *map, int x, int y, int clr);
 void	draw_map(t_map *map, int flag);
 void	draw_player(t_map *map);
@@ -68,4 +67,11 @@ void	bresenham(t_map *map, int x1, int y1, int clr);
 
 // rays
 void	cast_rays(t_map *map);
+
+
+// 3d projection 
+void	project3d(t_map	*map);
+
+// double arr distance 
+t_darr  *add_dist(t_map *map, double value);
 #endif

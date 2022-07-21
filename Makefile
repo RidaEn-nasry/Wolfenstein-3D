@@ -13,7 +13,8 @@ SRCS = $(MNDTR_PATH)/errors/validate_map.c\
 		$(MNDTR_PATH)/renderer/shape_drawers.c\
 		$(MNDTR_PATH)/renderer/game_drawers.c\
 		$(MNDTR_PATH)/renderer/moves.c\
-		$(MNDTR_PATH)/renderer/casting.c
+		$(MNDTR_PATH)/renderer/casting.c\
+		$(MNDTR_PATH)/renderer/utils.c	
 
 RM = rm -rf
 CC = gcc
@@ -29,7 +30,7 @@ MINLBX_PATH = ./srcs/utils/minilibx/
 MLX = -L/usr/local/lib -lmlx -framework OpenGL -framework AppKit
 #MLX = $(wildcard $(MINLBX_PATH)*)
 MLX_INC = -I/usr/local/include/
-%.o: %.c 
+%.o: %.c $(INCLDS)
 	$(CC) $(CFLAGS) $(INCS) $(MLX_INC) -c $< -o $@
 
 

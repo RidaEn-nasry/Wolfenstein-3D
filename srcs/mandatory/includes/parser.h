@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 09:13:47 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/21 15:06:29 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/21 23:42:37 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ typedef	struct	s_wall {
 } t_wall;
 
 
+typedef	struct s_darr {
+	double	*arr;
+	size_t	i;
+} t_darr;
+
 typedef struct s_render {
 	t_vector	*pvec;
 	double		fov;
@@ -40,7 +45,8 @@ typedef struct s_render {
 	double		rot_angl;
 	double		walk_spd;
 	double		turn_spd;
-	double		dist;
+	t_darr		*dist;
+	
 	t_wall		*wall;
 }	t_render;
 

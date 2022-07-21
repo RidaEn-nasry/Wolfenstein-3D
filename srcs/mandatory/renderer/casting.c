@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 20:24:51 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/21 21:25:22 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/22 00:31:10 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,26 @@
 
 
 
-// void	draw_point(t_map *map, double x, double y, int clr)
-// {
-// 	for (int i = 0; i < 50; i++)
-// 	{
-// 		mlx_pixel_put(map->mlx->mlx, map->mlx->win, x, y, clr);
-// 	}
-// }
+void	project3d(t_map	*map)
+{
+	int	i;
+	double	x;
+	double	y;
+	double	wall_proj_height;
+	double	proj_plan;
+
+	proj_plan = (WIDTH / 2) / tan(map->rndr->fov / 2);
+	i = 0;
+	while (i < WIDTH)
+	{
+		wall_proj_height = (CELL_SIZE / map->rndr->dist->arr[i]) * proj_plan;
+		x = i * 1;
+		y = (HEIGHT / 2 ) - (1 / 2);
+		draw_rect(map, x, y, 1, wall_proj_height);
+		i++;
+	}
+	// draw_rect(map, 100, 0, 100, 500);
+};
 
 double	get_dist(double x0, double x1, double y0, double y1)
 {
@@ -99,14 +112,14 @@ t_wall	*cast_v(t_map *map, double ray_angl)
 			found = true;
 			tmp->wall->x = nwall_x;
 			tmp->wall->y = nwall_y;
-			printf("x : %lf and y: %lf is inside a wall vecrtical\n", nwall_x, nwall_y);
-			printf("index: map[%d][%d]\n", (int)(yinter  / CELL_SIZE), (int)(xinter / CELL_SIZE));
+			// printf("x : %lf and y: %lf is inside a wall vecrtical\n", nwall_x, nwall_y);
+			// printf("index: map[%d][%d]\n", (int)(yinter  / CELL_SIZE), (int)(xinter / CELL_SIZE));
 			// draw_point(map, nwall_x, nwall_y, 0x6633AA);
 			break;
 		}
 		else {
-			printf("x : %lf and y: %lf is not inside a wall vertical\n", xinter, yinter);
-			printf("index: map[%d][%d]\n", (int)(yinter  / CELL_SIZE), (int)(xinter / CELL_SIZE));
+			// printf("x : %lf and y: %lf is not inside a wall vertical\n", xinter, yinter);
+			// printf("index: map[%d][%d]\n", (int)(yinter  / CELL_SIZE), (int)(xinter / CELL_SIZE));
 			nwall_x += tmp->step->x;
 			nwall_y += tmp->step->y;
 		}
@@ -173,21 +186,20 @@ t_wall	*cast_h(t_map *map, double ray_angl)
 			found = true;
 			tmp->wall->x = nwall_x;
 			tmp->wall->y = nwall_y;
-			printf("x : %lf and y: %lf is inside a wall horizon\n", nwall_x, nwall_y);
-			printf("index: map[%d][%d]\n", (int)(nwall_x  / CELL_SIZE), (int)(nwall_x / CELL_SIZE));
+			// printf("x : %lf and y: %lf is inside a wall horizon\n", nwall_x, nwall_y);
+			// printf("index: map[%d][%d]\n", (int)(nwall_x  / CELL_SIZE), (int)(nwall_x / CELL_SIZE));
 			// draw_point(map, nwall_x, nwall_y, 0x6633AA);
 			break;
 		}
 		else {
-			printf("x : %lf and y: %lf is not inside a wall horizon\n", xinter, yinter);
-			printf("index: map[%d][%d]\n", (int)(yinter  / CELL_SIZE), (int)(xinter / CELL_SIZE));	
+			// printf("x : %lf and y: %lf is not inside a wall horizon\n", xinter, yinter);
+			// printf("index: map[%d][%d]\n", (int)(yinter  / CELL_SIZE), (int)(xinter / CELL_SIZE));	
 			nwall_x += tmp->step->x;
 			nwall_y += tmp->step->y;
 		}
 	}
 	if (!found)
 	{
-		mlx_pixel_put(map->mlx->mlx, map->mlx->win, xinter, yinter, 0xFF0000);
 		tmp->wall->x = map->rndr->pvec->x + (CELL_SIZE * map->w);
 		tmp->wall->y = map->rndr->pvec->y + (CELL_SIZE * map->h);
 	}
@@ -214,9 +226,20 @@ void	cast(t_map *map, double ray_angl)
 	double	distancev = get_dist( startx, wall_v->wall->x, starty, wall_v->wall->y);
 
 	if ( distanceh <= distancev)
+	{
 		end = wall_h;
+		map->rndr->dist = add_dist(map, distanceh);
+	}
 	else
+	{
 		end = wall_v;
+		map->rndr->dist = add_dist(map, distancev);
+	}
+	// for (size_t i = 0; i <= map->rndr->dist->i; i++)
+	// {
+	// 	printf("distance: %lf\n", map->rndr->dist->arr[i]);
+	// }
+	// map->rndr->dist = add_dist(map, )
 	// end = cast_v(map, ray_angl);
 	// if (end->wall->x == INT_MAX || end->wall->y == INT_MAX)
 	// {
@@ -240,7 +263,6 @@ void	cast_rays(t_map *map)
 	ray_angl = map->rndr->rot_angl - (map->rndr->fov / 2);
 	while (i < WIDTH)
 	{
-		printf("************* %d *********************************\n", i);
 		cast(map, ray_angl);
 		ray_angl += (map->rndr->fov / WIDTH);
 		i++;

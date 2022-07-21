@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 13:43:12 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/21 21:04:53 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/22 00:30:45 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	draw_player(t_map *map)
 {
-	cast_rays(map);
-	draw_rect(map);
+		
+	draw_rect(map, map->rndr->pvec->x, map->rndr->pvec->y, PLY_SIZE, PLY_SIZE);
 }
 
 void	draw_map(t_map *map, int flag) {
@@ -46,6 +46,10 @@ void	draw_map(t_map *map, int flag) {
 		y += CELL_SIZE;
 	}
 	if (flag == 1 || p == true)
+	{
 		draw_player(map);
+		cast_rays(map);	
+		// project3d(map);
+	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 13:44:21 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/21 21:19:36 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/22 00:22:09 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,34 @@ void	draw_square(t_map *map, int x, int y, int clr)
 }
 
 
-void	draw_rect(t_map *map)
+void	draw_rect(t_map *map, double x, double y, int width, int height)
 {
-	int	x;
-	int	y;
+	// int	x;
+	// int	y;
 	
-	x = map->rndr->pvec->x;
-	y = map->rndr->pvec->y;
-	while (y < (map->rndr->pvec->y + PLY_SIZE))
+	// x = map->rndr->pvec->x;
+	// y = map->rndr->pvec->y;
+	// while (y < (map->rndr->pvec->y + PLY_SIZE))
+	// {
+	// 	x = map->rndr->pvec->x;
+	// 	while (x < (map->rndr->pvec->x + PLY_SIZE))
+	// 	{
+	// 		put_pix_to_img(map, x, y, 0x0000FF);
+	// 		x++;
+	// 	}
+	// 	y++;
+	// }
+	double	prev_x;
+	prev_x = x;
+	double	x0;
+	double	y0;
+	
+	x0 = x + width;
+	y0 = y + height;
+	while (y <= y0)
 	{
-		x = map->rndr->pvec->x;
-		while (x < (map->rndr->pvec->x + PLY_SIZE))
+		x = prev_x;
+		while (x <= x0)
 		{
 			put_pix_to_img(map, x, y, 0x0000FF);
 			x++;
