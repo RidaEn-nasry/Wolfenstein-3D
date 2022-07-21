@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 10:11:27 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/20 13:52:57 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/20 22:10:00 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
  * 
  */
 
-void	cast_rays() {/*cast all rays here*/}
 
 void    render_map(t_map *map)
 {
@@ -28,9 +27,7 @@ void    render_map(t_map *map)
 	/*draw_rect(map);*/
 	draw_map(map, 0);
 	mlx_put_image_to_window(map->mlx->mlx, map->mlx->win, map->mlx->img, 0, 0);
-	/*mlx_key_hook(map->mlx->win, move_player, map);*/
-	/*mlx_hook(map->mlx->win, 2, 1L<<0, move_player, map);*/
-	mlx_hook(map->mlx->win, 2, 0, move_player, map);
+	mlx_hook(map->mlx->win, 2, 1L<<0, move_player, map);
 	mlx_loop(map->mlx->mlx);
 }
 

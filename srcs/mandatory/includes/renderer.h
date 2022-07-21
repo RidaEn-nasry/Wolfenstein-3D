@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 08:20:10 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/20 11:49:23 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/20 23:36:10 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define CELL_SIZE (64 * SCL_FAC)
 # define SPEED 8
 # define PLY_SIZE 16
+# define NUM_RAYS WIDTH / 2
 // key codes
 # define UP 13   
 # define DOWN 1 
@@ -55,10 +56,15 @@ void	draw_rect(t_map *map);
 void	draw_square(t_map *map, int x, int y, int clr);
 void	draw_map(t_map *map, int flag);
 void	draw_player(t_map *map);
-void	draw_line(t_map *map);
+void	draw_line(t_map *map, double angle, int len);
 
 
 // moves
 int	move_player(int key_code, t_map *map);
 void	update_ang(t_map *map);
+void	bresenham(t_map *map, int x1, int y1, int clr);
+
+
+// rays
+void	cast_rays(t_map *map);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 14:09:17 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/20 17:37:23 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/20 22:00:51 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	update_ang(t_map *map)
 	map->rndr->rot_angl += (map->rndr->turn_dir * map->rndr->turn_spd);
 }
 
-
 bool	inside_wall(double x, double y, t_map *map)
 {
 	x = map->rndr->pvec->x;
@@ -46,11 +45,11 @@ bool	inside_wall(double x, double y, t_map *map)
 		if (map->map[index_y][index_x] == '1')
 			return (true);
 		if (i == 0)
-			incx += 16;
+			incx += PLY_SIZE;
 		else if (i == 1)
-			incy += 14;
+			incy += PLY_SIZE;
 		else if (i == 2)
-			incx -= 16;
+			incx -= PLY_SIZE;
 	}
 	return (false); 
 	// check 

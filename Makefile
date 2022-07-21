@@ -13,6 +13,7 @@ SRCS = $(MNDTR_PATH)/errors/validate_map.c\
 		$(MNDTR_PATH)/renderer/shape_drawers.c\
 		$(MNDTR_PATH)/renderer/game_drawers.c\
 		$(MNDTR_PATH)/renderer/moves.c\
+		$(MNDTR_PATH)/renderer/casting.c
 
 RM = rm -rf
 CC = gcc

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shape_drawers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 13:44:21 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/20 13:14:32 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/21 01:18:39 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,10 @@ void	draw_rect(t_map *map)
 	int	x;
 	int	y;
 	
-
 	x = map->rndr->pvec->x;
 	y = map->rndr->pvec->y;
 	while (y < (map->rndr->pvec->y + PLY_SIZE))
 	{
-		/*map->rndr->pvec->x = x - 20;*/
 		x = map->rndr->pvec->x;
 		while (x < (map->rndr->pvec->x + PLY_SIZE))
 		{
@@ -62,13 +60,12 @@ void	draw_rect(t_map *map)
 	}
 }
 
-
-void	draw_line(t_map	*map)
+void	draw_line(t_map	*map, double angle, int len)
 {
 	double	endx;
 	double	endy;
 	
-	endx = (map->rndr->pvec->x + (PLY_SIZE / 2))  + cos(map->rndr->rot_angl) * 30 ;
-	endy = (map->rndr->pvec->y + (PLY_SIZE / 2)) + sin(map->rndr->rot_angl) * 30;
+	endx = (map->rndr->pvec->x + (PLY_SIZE / 2)) + cos(angle) * len;
+	endy = (map->rndr->pvec->y + (PLY_SIZE / 2)) + sin(angle) * len;
 	bresenham(map, (int)endx, (int)endy , 0x03B965);
 }	

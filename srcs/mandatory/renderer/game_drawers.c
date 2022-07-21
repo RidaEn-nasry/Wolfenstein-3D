@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_drawers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 13:43:12 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/20 17:26:07 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/20 22:07:05 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,10 @@
 void	draw_player(t_map *map)
 {
 	draw_rect(map);
-	draw_line(map);	
-	//draw_line(map, x + (x / 2), y + (y / 2));
+	cast_rays(map);
 }
 
 void	draw_map(t_map *map, int flag) {
-
 	int	x;
 	int	y;
 
@@ -40,8 +38,7 @@ void	draw_map(t_map *map, int flag) {
 				map->rndr->pvec->x = x ;
 				map->rndr->pvec->y = y ;
 				draw_player(map);
-			}
-			
+			}			
 			x += CELL_SIZE;
 		}
 		y += CELL_SIZE;

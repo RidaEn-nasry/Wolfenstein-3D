@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 09:13:47 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/10 17:34:13 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/21 00:42:21 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ typedef struct s_map {
 	unsigned long		width;
 	unsigned long		height;
 	char			**map;
-	int			ceiling_color;
-	int			floor_color;
+	int				ceiling_color;
+	int				floor_color;
 	char			*north_texture;
 	char			*south_texture;
 	char			*east_texture;
