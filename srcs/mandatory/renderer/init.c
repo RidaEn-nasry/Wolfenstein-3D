@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:51:31 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/22 01:14:04 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/22 14:22:35 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_map   *init_rndr(t_map *map)
 	map->rndr->turn_dir = 0;
 	map->rndr->walk_dir = 0;
 	map->rndr->rot_angl = degtorad(90);
-	map->rndr->walk_spd = 5;
+	map->rndr->walk_spd = 4;
 	map->rndr->turn_spd = degtorad(10);
 	map->rndr->fov = degtorad(60);
 	map->clr->floor = 0xFF0000;

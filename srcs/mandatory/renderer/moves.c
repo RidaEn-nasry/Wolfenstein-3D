@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 14:09:17 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/21 16:29:57 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/22 14:09:22 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ void	move(t_map *map, int mv)
 
 	tmp = 100;
 	if (mv == LEFT)
-		map->rndr->turn_dir = 1;
-	else if (mv == RIGHT)
 		map->rndr->turn_dir = -1;
+	else if (mv == RIGHT)
+		map->rndr->turn_dir = 1;
 	if (mv == LEFT || mv == RIGHT)
 		update_ang(map);
 	if (mv == UP)

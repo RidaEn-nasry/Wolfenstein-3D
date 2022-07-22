@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 13:44:21 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/22 00:22:09 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/22 14:25:17 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ void	draw_rect(t_map *map, double x, double y, int width, int height)
 		x = prev_x;
 		while (x <= x0)
 		{
-			put_pix_to_img(map, x, y, 0x0000FF);
+			
+			put_pix_to_img(map, x, y, 0xC4B39C);
 			x++;
 		}
 		y++;

@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 20:24:51 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/22 01:17:21 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/22 14:31:23 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,24 @@ void	project3d(t_map	*map)
 	while (i < WIDTH)
 	{
 		// proj_plan = (WIDTH / 2) / tan(map->rndr->fov / 2);
-		proj_plan = 540 / tan(map->rndr->fov / 2);
+		proj_plan = ((1920.00 / 2.00) / tan(map->rndr->fov / 2.00));
 		
-		wall_proj_height = (64 / map->rndr->dist->arr[i]) * proj_plan;
+		wall_proj_height = (16 / map->rndr->dist->arr[i]) * proj_plan;
 		x = i * 1;
 		// printf("distance: %lf\n", map->rndr->dist->arr[i]);
-		y = (1920 / 2 ) - (1 / 2);
+		y = (1080.0 / 2.0) - (wall_proj_height / 2.0);
+	
+		if (x < (int)(map->w * CELL_SIZE) && y < (int)(map->h * CELL_SIZE))
+		{
+			// x = map->w * CELL_SIZE;
+			// x = x - 1;
+			y = (map->h * CELL_SIZE);
+			wall_proj_height -= (map->h * CELL_SIZE);
+		}
 		draw_rect(map, x, y, 1, wall_proj_height);
 		i++;
 	}
+	// draw_minimap(map);
 	// draw_rect(map, 100, 0, 100, 500);
 };
 
@@ -233,12 +242,12 @@ void	cast(t_map *map, double ray_angl)
 	if ( distanceh <= distancev)
 	{
 		end = wall_h;
-		map->rndr->dist = add_dist(map, distanceh);
+		map = add_dist(map, distanceh);
 	}
 	else
 	{
 		end = wall_v;
-		map->rndr->dist = add_dist(map, distancev);
+		map = add_dist(map, distancev);
 	}
 	// for (size_t i = 0; i <= map->rndr->dist->i; i++)
 	// {

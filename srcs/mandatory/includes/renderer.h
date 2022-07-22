@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 08:20:10 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/22 00:07:21 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/22 14:15:48 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@
 # define HEIGHT 1080
 # define WIDTH 1920 
 # define SCL_FAC 0.4
-# define CELL_SIZE 18
-# define SPEED 2
-# define PLY_SIZE 6
+# define CELL_SIZE 16
+// # define SPEED 2
+# define PLY_SIZE 4
 # define NUM_RAYS WIDTH / 2
 // key codes
 # define UP 13   
@@ -60,7 +60,7 @@ void	draw_line(t_map *map, double angle, int len);
 
 
 // moves
-int	move_player(int key_code, t_map *map);
+int     move_player(int key_code, t_map *map);
 void	update_ang(t_map *map);
 void	bresenham(t_map *map, int x1, int y1, int clr);
 
@@ -73,5 +73,5 @@ void	cast_rays(t_map *map);
 void	project3d(t_map	*map);
 
 // double arr distance 
-t_darr  *add_dist(t_map *map, double value);
+t_map  *add_dist(t_map *map, double value);
 #endif
