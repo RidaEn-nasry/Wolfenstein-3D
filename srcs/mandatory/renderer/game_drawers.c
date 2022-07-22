@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 13:43:12 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/22 00:30:45 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/22 01:15:55 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,11 @@ void	draw_map(t_map *map, int flag) {
 	{
 		draw_player(map);
 		cast_rays(map);	
-		// project3d(map);
+		// for (size_t i = 0; i < map->rndr->dist->len; i++)
+		// {
+		// 	printf("dist: %lf\n", map->rndr->dist->arr[i]);
+		// }
+		project3d(map);
 	}
 }
 

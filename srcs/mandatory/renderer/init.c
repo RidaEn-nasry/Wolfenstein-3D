@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:51:31 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/21 23:43:21 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/22 01:14:04 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_map   *init_rndr(t_map *map)
 	exit_free_if(!(map->rndr->wall->wall = malloc(sizeof(*map->rndr->wall->wall))),  "Error:\n\tmalloc failed", map);
 	exit_free_if(!(map->rndr->wall->step = malloc(sizeof(*map->rndr->wall->step))),  "Error:\n\tmalloc failed", map);
 	exit_free_if(!(map->rndr->dist = malloc(sizeof(*map->rndr->dist))), "Error:\n\tmalloc failed", map);
-	map->rndr->dist->i = 0;
+	map->rndr->dist->len = 0;
 	map->rndr->wall->wall->x = 0;
 	map->rndr->wall->wall->y = 0;
 	map->rndr->wall->step->x = 0;

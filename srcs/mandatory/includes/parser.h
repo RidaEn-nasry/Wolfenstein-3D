@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 09:13:47 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/21 23:42:37 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/22 01:14:22 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef	struct	s_wall {
 
 typedef	struct s_darr {
 	double	*arr;
-	size_t	i;
+	size_t	len;
 } t_darr;
 
 typedef struct s_render {

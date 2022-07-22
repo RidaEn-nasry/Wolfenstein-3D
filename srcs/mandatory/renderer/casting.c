@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 20:24:51 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/22 00:31:10 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/22 01:17:21 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,18 @@ void	project3d(t_map	*map)
 	double	wall_proj_height;
 	double	proj_plan;
 
-	proj_plan = (WIDTH / 2) / tan(map->rndr->fov / 2);
 	i = 0;
+	// for (size_t i =0 ; i < map->rndr->dist->len; i++)
+	// 	printf("dist: %lf\n", map->rndr->dist->arr[i]);	
 	while (i < WIDTH)
 	{
-		wall_proj_height = (CELL_SIZE / map->rndr->dist->arr[i]) * proj_plan;
+		// proj_plan = (WIDTH / 2) / tan(map->rndr->fov / 2);
+		proj_plan = 540 / tan(map->rndr->fov / 2);
+		
+		wall_proj_height = (64 / map->rndr->dist->arr[i]) * proj_plan;
 		x = i * 1;
-		y = (HEIGHT / 2 ) - (1 / 2);
+		// printf("distance: %lf\n", map->rndr->dist->arr[i]);
+		y = (1920 / 2 ) - (1 / 2);
 		draw_rect(map, x, y, 1, wall_proj_height);
 		i++;
 	}
