@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 08:20:10 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/22 14:15:48 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/22 16:49:11 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@
 # include <math.h>
 # include <stdlib.h>
 #include <limits.h>
-# define HEIGHT 1080
-# define WIDTH 1920 
 # define SCL_FAC 0.4
 # define CELL_SIZE 16
 // # define SPEED 2
@@ -57,6 +55,7 @@ void	draw_square(t_map *map, int x, int y, int clr);
 void	draw_map(t_map *map, int flag);
 void	draw_player(t_map *map);
 void	draw_line(t_map *map, double angle, int len);
+void	draw_minimap(t_map	*map);
 
 
 // moves
@@ -72,6 +71,10 @@ void	cast_rays(t_map *map);
 // 3d projection 
 void	project3d(t_map	*map);
 
+
+
 // double arr distance 
-t_map  *add_dist(t_map *map, double value);
+t_map  *add_dist(t_map *map, double value, double ray_angl);
+t_map   *add_ray_coor(t_map *map, double x, double y);
+
 #endif

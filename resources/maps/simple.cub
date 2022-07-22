@@ -1,0 +1,16 @@
+
+SO ./resources/textures/example.xpm
+NO ./resources/textures/example.xpm
+WE ./resources/textures/example.xpm
+EA ./resources/textures/example.xpm
+
+F 255,100,0
+C 100,23,33
+
+
+11111
+10101
+100N1
+10101
+11001
+11111

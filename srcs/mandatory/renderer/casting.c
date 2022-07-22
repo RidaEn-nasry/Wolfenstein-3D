@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 20:24:51 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/22 14:31:23 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/22 17:33:36 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,15 @@ void	project3d(t_map	*map)
 	{
 		// proj_plan = (WIDTH / 2) / tan(map->rndr->fov / 2);
 		proj_plan = ((1920.00 / 2.00) / tan(map->rndr->fov / 2.00));
-		
-		wall_proj_height = (16 / map->rndr->dist->arr[i]) * proj_plan;
+		// map->rndr->wall->arr_dist[i] *= cos(map->rndr->wall->arr_angl[i] - map->rndr->rot_angl);
+		wall_proj_height = (16 / map->rndr->wall->arr_dist[i]) * proj_plan;
 		x = i * 1;
 		// printf("distance: %lf\n", map->rndr->dist->arr[i]);
-		y = (1080.0 / 2.0) - (wall_proj_height / 2.0);
-	
-		if (x < (int)(map->w * CELL_SIZE) && y < (int)(map->h * CELL_SIZE))
-		{
-			// x = map->w * CELL_SIZE;
-			// x = x - 1;
-			y = (map->h * CELL_SIZE);
-			wall_proj_height -= (map->h * CELL_SIZE);
-		}
+		y = (1080. / 2.0) - (wall_proj_height / 2.0);
 		draw_rect(map, x, y, 1, wall_proj_height);
 		i++;
 	}
-	// draw_minimap(map);
+	draw_minimap(map);
 	// draw_rect(map, 100, 0, 100, 500);
 };
 
@@ -92,20 +84,20 @@ t_wall	*cast_v(t_map *map, double ray_angl)
 	exit_free_if(!(tmp = malloc(sizeof(*tmp))), "Error:\n\tmalloc failed\n", map);
 	exit_free_if(!(tmp->wall = malloc(sizeof(*tmp->wall))), "Error:\n\tmalloc failed\n", map);
 	exit_free_if(!(tmp->step = malloc(sizeof(*tmp->step))), "Error:\n\tmalloc failed\n", map);
-	startx = map->rndr->pvec->x + (PLY_SIZE / 2);
-	starty = map->rndr->pvec->y + (PLY_SIZE / 2);
+	startx = map->rndr->pvec->x + (4 / 2);
+	starty = map->rndr->pvec->y + (4 / 2);
 	
 	found = false;
-	xinter = floor(startx / CELL_SIZE) * CELL_SIZE;
+	xinter = floor(startx / 16) * 16;
 	ray_angl = normalize_ang(ray_angl);
 	if (ray_is_right(ray_angl))
-		xinter += CELL_SIZE;
+		xinter += 16;
 	yinter = starty + (xinter - startx) * tan(ray_angl);
 	
-	tmp->step->x = CELL_SIZE;
+	tmp->step->x = 16;
 	if (!ray_is_right(ray_angl))
 		tmp->step->x *= -1;
-	tmp->step->y = CELL_SIZE * tan(ray_angl);
+	tmp->step->y = 16 * tan(ray_angl);
 	if (!ray_is_down(ray_angl) && tmp->step->y > 0)
 		tmp->step->y *= -1;
 	else if (ray_is_down(ray_angl) && tmp->step->y < 0)
@@ -116,32 +108,28 @@ t_wall	*cast_v(t_map *map, double ray_angl)
 	
 	if (!ray_is_right(ray_angl))
 		nwall_x -= 1;
-	while (nwall_x >= 0 && nwall_x <= (CELL_SIZE * map->w) && nwall_y >= 0 && nwall_y <= (CELL_SIZE * map->h))
+	while (nwall_x >= 0 && nwall_x <= (16 * map->w) && nwall_y >= 0 && nwall_y <= (16 * map->h))
 	{
-		index_x = nwall_x / CELL_SIZE;
-		index_y = nwall_y / CELL_SIZE;
+		index_x = nwall_x / 16;
+		index_y = nwall_y / 16;
 		
 		if (map->map[index_y][index_x] == '1')
 		{
 			found = true;
 			tmp->wall->x = nwall_x;
 			tmp->wall->y = nwall_y;
-			// printf("x : %lf and y: %lf is inside a wall vecrtical\n", nwall_x, nwall_y);
-			// printf("index: map[%d][%d]\n", (int)(yinter  / CELL_SIZE), (int)(xinter / CELL_SIZE));
-			// draw_point(map, nwall_x, nwall_y, 0x6633AA);
+			
 			break;
 		}
 		else {
-			// printf("x : %lf and y: %lf is not inside a wall vertical\n", xinter, yinter);
-			// printf("index: map[%d][%d]\n", (int)(yinter  / CELL_SIZE), (int)(xinter / CELL_SIZE));
 			nwall_x += tmp->step->x;
 			nwall_y += tmp->step->y;
 		}
 	}
 	if (!found)
 	{
-		tmp->wall->x = (CELL_SIZE * map->w);
-		tmp->wall->y = (CELL_SIZE * map->h);
+		tmp->wall->x = (16 * map->w);
+		tmp->wall->y = (16 * map->h);
 	}
 	return (tmp);	
 }
@@ -165,22 +153,22 @@ t_wall	*cast_h(t_map *map, double ray_angl)
 	exit_free_if(!(tmp = malloc(sizeof(*tmp))), "Error:\n\tmalloc failed\n", map);
 	exit_free_if(!(tmp->wall = malloc(sizeof(*tmp->wall))), "Error:\n\tmalloc failed\n", map);
 	exit_free_if(!(tmp->step = malloc(sizeof(*tmp->step))), "Error:\n\tmalloc failed\n", map);
-	startx = map->rndr->pvec->x + (PLY_SIZE / 2);
-	starty = map->rndr->pvec->y + (PLY_SIZE / 2);
+	startx = map->rndr->pvec->x + 2;
+	starty = map->rndr->pvec->y + 2;
 
 	
 	ray_angl = normalize_ang(ray_angl);	
 	found = false;	
-	yinter = floor(starty / CELL_SIZE) * CELL_SIZE;
+	yinter = floor(starty / 16) * 16;
 	if (ray_is_down(ray_angl))
-		yinter += CELL_SIZE;		
+		yinter += 16;		
 	// xinter = map->rndr->pvec->x + (yinter - map->rndr->pvec->y) / tan(ray_angl);
 	xinter = startx + ((yinter - starty) / tan(ray_angl));
-	xinter = startx + (yinter - starty) / tan(ray_angl);
-	tmp->step->y = CELL_SIZE;
+	// xinter = startx + (yinter - starty) / tan(ray_angl);
+	tmp->step->y = 16;
 	if (!ray_is_down(ray_angl))
 		tmp->step->y *= -1;
-	tmp->step->x = CELL_SIZE / tan(ray_angl);
+	tmp->step->x = 16 / tan(ray_angl);
 	if (ray_is_right(ray_angl) && tmp->step->x < 0)
 		tmp->step->x *= -1;
 	else if (!ray_is_right(ray_angl) && tmp->step->x > 0)
@@ -191,31 +179,31 @@ t_wall	*cast_h(t_map *map, double ray_angl)
 	
 	if (!ray_is_down(ray_angl))
 		nwall_y -= 1;
-	while (nwall_x >= 0 && nwall_x <= (CELL_SIZE * map->w) && nwall_y >= 0 && nwall_y <= (CELL_SIZE * map->h))
+	while (nwall_x >= 0 && nwall_x <= (16 * map->w) && nwall_y >= 0 && nwall_y <= (16 * map->h))
 	{
-		index_x = nwall_x / CELL_SIZE;
-		index_y = nwall_y / CELL_SIZE;
+		index_x = nwall_x / 16;
+		index_y = nwall_y / 16;
 		if (map->map[index_y][index_x] == '1')
 		{
 			found = true;
 			tmp->wall->x = nwall_x;
 			tmp->wall->y = nwall_y;
 			// printf("x : %lf and y: %lf is inside a wall horizon\n", nwall_x, nwall_y);
-			// printf("index: map[%d][%d]\n", (int)(nwall_x  / CELL_SIZE), (int)(nwall_x / CELL_SIZE));
+			// printf("index: map[%d][%d]\n", (int)(nwall_x  / 16), (int)(nwall_x / 16));
 			// draw_point(map, nwall_x, nwall_y, 0x6633AA);
 			break;
 		}
 		else {
 			// printf("x : %lf and y: %lf is not inside a wall horizon\n", xinter, yinter);
-			// printf("index: map[%d][%d]\n", (int)(yinter  / CELL_SIZE), (int)(xinter / CELL_SIZE));	
+			// printf("index: map[%d][%d]\n", (int)(yinter  / 16), (int)(xinter / 16));	
 			nwall_x += tmp->step->x;
 			nwall_y += tmp->step->y;
 		}
 	}
 	if (!found)
 	{
-		tmp->wall->x = map->rndr->pvec->x + (CELL_SIZE * map->w);
-		tmp->wall->y = map->rndr->pvec->y + (CELL_SIZE * map->h);
+		tmp->wall->x = map->rndr->pvec->x + (16 * map->w);
+		tmp->wall->y = map->rndr->pvec->y + (16 * map->h);
 	}
 	return (tmp);
 }
@@ -232,9 +220,9 @@ void	cast(t_map *map, double ray_angl)
 	// printf("distance ver: %lf\n", get_dist(map->rndr->pvec->x, wall_v->wall->x, map->rndr->pvec->y, wall_v->wall->y));
 	
 
-	double startx = map->rndr->pvec->x + (CELL_SIZE / 2);
-	double starty = map->rndr->pvec->y  + (CELL_SIZE / 2); 
-	// // double	endx = wall_h->wall->x + (CELL_SIZE / 2);
+	double startx = map->rndr->pvec->x + (16 / 2);
+	double starty = map->rndr->pvec->y  + (16 / 2); 
+	// // double	endx = wall_h->wall->x + (16 / 2);
 	
 	double	distanceh = get_dist( startx, wall_h->wall->x, starty, wall_h->wall->y);
 	double	distancev = get_dist( startx, wall_v->wall->x, starty, wall_v->wall->y);
@@ -242,12 +230,12 @@ void	cast(t_map *map, double ray_angl)
 	if ( distanceh <= distancev)
 	{
 		end = wall_h;
-		map = add_dist(map, distanceh);
+		map = add_dist(map, distanceh, ray_angl);
 	}
 	else
 	{
 		end = wall_v;
-		map = add_dist(map, distancev);
+		map = add_dist(map, distancev, ray_angl);
 	}
 	// for (size_t i = 0; i <= map->rndr->dist->i; i++)
 	// {
@@ -264,7 +252,11 @@ void	cast(t_map *map, double ray_angl)
 	// 	end = wall_v;
 	// if (wall_v->wall->y == INT_MAX || wall_v->wall->y == INT_MAX)
 	// 	end = wall_h;
-	bresenham(map, end->wall->x, end->wall->y, 0x03B965);
+	// printf("end x: %lf and y: %lf\n", end->wall->x, end->wall->y);
+	// bresenham(map, end->wall->x, end->wall->y, 0x00FF00);
+	map = add_ray_coor(map, end->wall->x, end->wall->y);
+	// printf("ray_length in minimap: %zu\n", map->rndr->wall->rys_len);
+	// printf("endx: %lf and endy: %lf\n", end->wall->x, end->wall->y);
 	
 }
 

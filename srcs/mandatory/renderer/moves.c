@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 14:09:17 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/22 14:09:22 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/22 17:08:34 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,17 @@ bool	inside_wall(double x, double y, t_map *map)
 		y = map->rndr->pvec->y + incy;
 		update_pos(&x, &y, map);
 
-		int index_x = x / CELL_SIZE;
-		int index_y = y / CELL_SIZE;
+		int index_x = x / 16;
+		int index_y = y / 16;
 		
 		if (map->map[index_y][index_x] == '1')
 			return (true);
 		if (i == 0)
-			incx += PLY_SIZE;
+			incx += 4;
 		else if (i == 1)
-			incy += PLY_SIZE;
+			incy += 4;
 		else if (i == 2)
-			incx -= PLY_SIZE;
+			incx -= 4;
 	}
 	return (false); 
 	// check 
