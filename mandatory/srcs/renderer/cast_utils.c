@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 02:46:49 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/26 06:31:06 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/29 11:51:13 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	get_txtr(t_map *map, double ray_angl)
 	ray_angl = denormalize_angle(ray_angl);
 	if (!ray_is_down(ray_angl) && ray_is_right(ray_angl))
 	{
-			map->txtr->data_h = map->txtr->south_data;
-			map->txtr->data_v = map->txtr->west_data;
+		map->txtr->data_h = map->txtr->south_data;
+		map->txtr->data_v = map->txtr->west_data;
 	}
 	if (!ray_is_down(ray_angl) && !ray_is_right(ray_angl))
 	{

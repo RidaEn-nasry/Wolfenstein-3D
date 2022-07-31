@@ -6,11 +6,12 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 21:17:08 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/26 22:42:49 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/29 22:57:30 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <parser.h>
+#include <errors.h>
 
 /**
  * @brief Check if the line is an identifier (path to texture or color value)
@@ -42,12 +43,12 @@ bool	is_map(char *line)
 	size_t	i;
 
 	i = 0;
+	line = check_line(line);
 	while (i < ft_strlen(line) - 1)
 	{
-		while (ft_isspace(line[i]))
-			i++;
 		if (line[i] != '0' && line[i] != '1' && line[i] != 'S' && \
-		line[i] != 'E' && line[i] != 'W' && line[i] != 'N' && line[i] != '2')
+		line[i] != 'E' && line[i] != 'W' && line[i] != 'N' && line[i] != '2'
+			&& !ft_isspace(line[i]))
 			return (false);
 		i++;
 	}

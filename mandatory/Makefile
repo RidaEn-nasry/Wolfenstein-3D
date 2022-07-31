@@ -1,3 +1,5 @@
+MAKEFLAGS += --silent
+
 NAME = cub3d
 
 MNDTR_PATH = ./srcs/
@@ -23,7 +25,10 @@ SRCS = $(MNDTR_PATH)/errors/validate_map.c\
 		$(MNDTR_PATH)/renderer/project_3d.c\
 		$(MNDTR_PATH)/renderer/prj_calculate.c\
 		$(MNDTR_PATH)/renderer/intersection.c\
-		$(MNDTR_PATH)/renderer/utils.c	
+		$(MNDTR_PATH)/renderer/utils.c\
+		$(MNDTR_PATH)/errors/utils.c\
+		$(MNDTR_PATH)/errors/err_utils.c\
+		$(MNDTR_PATH)/errors/utils2.c	
 
 RM = rm -rf
 CC = gcc

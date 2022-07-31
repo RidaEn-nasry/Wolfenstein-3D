@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 19:51:04 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/26 16:27:51 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/29 17:12:17 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ size_t	ft_filelcount( char	*file)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
+		free(line);
 		line = get_next_line(fd);
 		count++;
-		free(line);
 	}
-	return (count);
+	return (free(line), count);
 }

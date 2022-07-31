@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   animate.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 22:54:32 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/27 10:21:02 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/28 15:41:17 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_v	get_index(t_map *map, int i, double *dist)
 			map->rndr->wall->rays[i].y, map->rndr->wall->arr_angl[i]);
 	index.x = coord[0] / CELL_SIZE;
 	index.y = coord[1] / CELL_SIZE;
-	return (index);
+	return (free(coord), index);
 }
 
 void	open_door(t_map *map)
@@ -83,7 +83,7 @@ void	close_door(t_map *map)
 			index = get_index(map, i, &dist);
 			pindex = get_pindex(map);
 			if (map->map[index.y][index.x] == '0' && dist < 100
-			&& index.x != pindex.x && index.y != pindex.x)
+			&& dist > 30)
 			{
 				map->map[index.y][index.x] = '2';
 				break ;

@@ -1,3 +1,5 @@
+MAKEFLAGS += --silent
+
 NAME = cub3d
 
 BONUS_PATH = ./srcs/
@@ -26,7 +28,10 @@ SRCS = $(BONUS_PATH)/errors/validate_map.c\
 		$(BONUS_PATH)/renderer/animate_utils.c\
 		$(BONUS_PATH)/renderer/sounds.c\
 		$(BONUS_PATH)/errors/validate_map1.c\
-		$(BONUS_PATH)/errors/validate_map2.c
+		$(BONUS_PATH)/errors/validate_map2.c\
+		$(BONUS_PATH)/errors/utils.c\
+		$(BONUS_PATH)/errors/err_utils.c\
+		$(BONUS_PATH)/errors/utils2.c
 
 
 RM = rm -rf
@@ -36,7 +41,7 @@ CFLAGS = -Wall -Wextra -Werror -g
 OBJS = $(SRCS:.c=.o)
 INCS = -I$(BONUS_PATH)/includes/ -I./srcs/utils/libft/
 INCLDS = $(BONUS_PATH)/includes/parser.h $(BONUS_PATH)/includes/errors.h $(BONUS_PATH)/includes/renderer.h 
-LIBFT_PATH = ./srcs/utils/libft/
+LIBFT_PATH = ./srcs/utils/libft
 MINLBX_PATH = ./srcs/utils/minilibx/
 
 
@@ -47,10 +52,11 @@ MLX_INC = -I$(MINLBX_PATH)/
 	$(CC) $(CFLAGS) $(INCS) $(MLX_INC) -c $< -o $@
 
 
-$(NAME): $(OBJS) $(INCLDS)
+$(NAME): $(OBJS) $(INCLDS) $(LIBFT_PATH)/*.c
 	$(MAKE) -C $(LIBFT_PATH)
 	$(MAKE) -C $(MINLBX_PATH)
 	$(CC) $(OBJS) $(LIBFT_PATH)/libft.a $(MLX) -o  $@
+
 
 run: $(NAME)
 	./$(NAME) ./resources/maps/map.cub

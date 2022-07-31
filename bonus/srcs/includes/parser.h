@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 09:13:47 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/26 22:33:14 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/28 22:47:26 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,7 @@ typedef struct s_map {
 	unsigned long		h;
 	char				**map;
 	char				**env;
+	t_v					clr_txtr_count;
 	t_colors			*clr;
 	t_textures			*txtr;
 	t_mlx				*mlx;

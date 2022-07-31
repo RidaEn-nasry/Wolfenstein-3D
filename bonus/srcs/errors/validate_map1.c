@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:59:26 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/27 09:48:22 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/29 23:10:16 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,29 @@ void	check_is_indetifier(t_map *map, char *line)
 	}
 }
 
-void	exit_if_assist(char *map_file, int *fd)
+void	is_map_assist(t_map	*map, int fd, char *line)
+{
+	line = check_line(line);
+	exit_free_if(!(line = ft_strtrim(line, " ")),
+		"Error:\n\tmalloc failed", map, 1);
+	ft_doubfree((void **)map->map, 0);
+	map->map = malloc(sizeof(char *) * 2);
+	map->map[0] = line;
+	map->map[1] = NULL;
+	map = get_map(fd, map);
+	exit_free_if(!map, "Error:\n\tInvalid map", map, 1);
+}
+
+void	get_color_assist(t_map *map, char c, int color)
+{
+	if (c == 'F')
+		map->clr->floor = color;
+	else if (c == 'C')
+		map->clr->ceiling = color;
+	map->clr_txtr_count.x += 1;
+}
+
+void	exit_if_assist(t_map *map, char *map_file, int *fd, char **env)
 {
 	exitif((*fd = open(map_file, O_RDONLY)) == -1, "Error:\n\tinvalid map file");
 	exitif((ft_strncmp(map_file + ft_strlen(map_file) - 4, ".cub", 4) != 0),
@@ -42,20 +64,10 @@ void	exit_if_assist(char *map_file, int *fd)
 	exitif(ft_filelcount(map_file) < 7, "Error:\n\tMissing values in map file");
 	exitif(!map_is_last(map_file),
 		"Error:\n\tMap content should be at the end of the file");
-}
-
-void	is_map_assist(t_map	*map, int fd, char *line)
-{
-	exit_free_if(!ft_strofonly(ft_substr(line, 0, ft_strlen(line) - 1), "1"),
-		"Error:\n\tmap should be surrounded by walls", map, 1);
-	map->map = malloc(sizeof(char *) * 2);
-	map->map[0] = ft_substr(line, 0, ft_strlen(line) - 1);
-	map->map[1] = NULL;
-	map = get_map(fd, map);
-	exit_free_if(!map, "Error:\n\tInvalid map", map, 1);
-	exit_free_if(!ft_strofonly(
-			map->map[ft_2darr_len((const char**) map->map) - 1], "1"),
-		"Error:\n\tmap should be surrounded by walls", map, 1);
+	map->env = ft_doubdup(env);
+	map->map = ft_file_to_2darr(map_file);
+	map->map = get_new_map(map->map);
+	exit_free_if(!check_map(map->map), "Error:\n\tinvalid map", map, 1);
 }
 
 t_map	*validate_map(char *map_file, char **env)
@@ -64,25 +76,25 @@ t_map	*validate_map(char *map_file, char **env)
 	int			fd;
 	t_map		*map;
 
-	exit_if_assist(map_file, &fd);
-	line = get_next_line(fd);
 	map = init();
-	map->env = ft_doubdup(env);
+	exit_if_assist(map, map_file, &fd, env);
+	line = get_next_line(fd);
 	while (line != NULL)
 	{
 		if (ft_isempty(line))
 		{
-			free(line);
-			line = get_next_line(fd);
+			free_and_gnl(&line, fd);
 			continue ;
 		}
 		check_is_indetifier(map, line);
 		if (is_map(line))
+		{
 			is_map_assist(map, fd, line);
-		if (is_map(line))
 			break ;
-		free(line);
-		line = get_next_line(fd);
+		}
+		free_and_gnl(&line, fd);
 	}
-	return (close(fd), map);
+	exit_free_if(map->clr_txtr_count.x != 2 || \
+	map->clr_txtr_count.y != 4, "Error:\n\t invalid arguments in map", map, 1);
+	return (ft_sfree(line), close(fd), map);
 }

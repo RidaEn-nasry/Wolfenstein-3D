@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 09:13:47 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/26 23:56:28 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/29 23:33:11 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ typedef struct s_map {
 	unsigned long		w;
 	unsigned long		h;
 	char				**map;
+	t_v					clr_txtr_count;
 	t_colors			*clr;
 	t_textures			*txtr;
 	t_mlx				*mlx;

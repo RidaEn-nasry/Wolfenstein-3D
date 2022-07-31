@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:59:26 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/27 09:56:19 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/29 23:20:45 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ t_map	*init(void)
 		"Error\n\tmalloc error", map, 1);
 	exit_free_if(!(map->clr = malloc(sizeof(*map->clr))),
 		"Error\n\tmalloc error", map, 1);
+	map->clr_txtr_count.x = 0;
+	map->clr_txtr_count.y = 0;
 	map->map = NULL;
 	map->txtr->east = NULL;
 	map->txtr->west = NULL;
@@ -48,12 +50,15 @@ t_map	*get_texture(char *line, t_map *map)
 	char	*path;
 	char	*hold;
 	int		fd;
+	int		i;
 
-	hold = ft_substr(line, ft_strchr(line, '/')
-			- line - 1, ft_strlen(line) - 1);
+	i = 0;
+	while (is_txtr(line[i]))
+		i++;
+	hold = ft_substr(line, i, ft_strlen(line) - 1);
 	path = ft_strtrim(hold, " ");
-	exit_free_if((fd = open(path, O_RDONLY)) == -1,
-		"Error:\n\ttexture file not found", map, 1);
+	exit_free_if((fd = open(path, O_RDONLY) == -1),
+		"Error\n\ttexture file not found", map, 1);
 	if (line[0] == 'N' && line[1] == 'O')
 		map->txtr->north = path;
 	else if (line[0] == 'S' && line[1] == 'O')
@@ -62,7 +67,8 @@ t_map	*get_texture(char *line, t_map *map)
 		map->txtr->east = path;
 	else if (line[0] == 'W' && line[1] == 'E')
 		map->txtr->west = path;
-	free(hold);
+	ft_sfree(hold);
+	map->clr_txtr_count.y += 1;
 	return (map);
 }
 
@@ -72,6 +78,7 @@ void	get_color_assist(t_map *map, char c, int color)
 		map->clr->floor = color;
 	else if (c == 'C')
 		map->clr->ceiling = color;
+	map->clr_txtr_count.x += 1;
 }
 
 t_map	*get_color(char *line, t_map *map)
@@ -80,26 +87,24 @@ t_map	*get_color(char *line, t_map *map)
 	int		color;
 	int		tmp;
 	int		i;
+	char	**temp;
 
 	color = 0;
-	i = 0;
-	while (line[i] != 'F' && line[i] != 'C')
-		i++;
-	i += 1;
-	while (ft_isspace(line[i]))
-		i++;
-	rgb = ft_split(&line[i], ',');
-	exit_free_if(!rgb, "Error:\n\tft_split failed", map, 1);
+	temp = NULL;
+	rgb = get_rgb(line, temp, map);
 	i = -1;
 	while (rgb[++i])
-	{		
-		rgb[i] = ft_strtrim(rgb[i], "\n");
+	{
+		exit_free_if(ft_isempty(rgb[i]), "Error:\n\tinvalid rgb value", map, 1);
+		if (rgb[i][ft_strlen(rgb[i]) - 1] == '\n')
+			rgb[i][ft_strlen(rgb[i]) - 1] = '\0';
 		exit_free_if(!ft_isnumber(rgb[i]), "Error:\n\tinvalid rgb value", map, 1);
 		tmp = ft_atoi(rgb[i]);
 		exit_free_if(tmp < 0 || tmp > 255, "Err:\n\tcolor out of range", map, 1);
 		color += tmp * pow(256, 2 - i);
 	}
 	get_color_assist(map, line[0], color);
+	ft_doubfree((void **)rgb, 0);
 	return (map);
 }
 
@@ -114,6 +119,10 @@ bool	map_is_last(char *map_file)
 	while (ft_isempty(lines[len - 1]))
 		len--;
 	if (!is_map(lines[len - 1]))
+	{
+		ft_doubfree((void **)lines, 0);
 		return (false);
+	}
+	ft_doubfree((void **)lines, 0);
 	return (true);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sounds.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 22:55:11 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/27 09:45:00 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/28 13:41:02 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,8 @@ void	play_sound(t_map *map)
 			exit_free_if(execve(cmd, arg, map->env) == -1,
 				"Error:\n\texecve error", map, 1);
 	}
+	free(arg[0]);
+	free(arg[1]);
+	free(arg[2]);
+	free(arg);
 }

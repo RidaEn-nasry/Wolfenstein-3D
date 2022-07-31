@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   casting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 20:24:51 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/27 09:58:03 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/28 11:57:50 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,12 @@ void	cast(t_map *map, double ray_angl)
 	wall_h = cast_h(map, ray_angl);
 	wall_v = cast_v(map, ray_angl);
 	get_smaller_dist(map, wall_h, wall_v, ray_angl);
+	free(wall_h->wall);
+	free(wall_h->step);
+	free(wall_h);
+	free(wall_v->wall);
+	free(wall_v->step);
+	free(wall_v);
 }
 
 void	cast_rays(t_map *map)

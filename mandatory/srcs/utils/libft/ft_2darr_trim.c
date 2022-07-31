@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_2darr_trim.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:52:11 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/13 19:56:36 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/29 18:25:57 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 char	**ft_2darr_trim(char **doub, char *set)
 {
 	size_t	i;
+	char	*hold;
 
 	i = 0;
 	if (!doub || !set)
@@ -28,7 +29,9 @@ char	**ft_2darr_trim(char **doub, char *set)
 	{
 		if (ft_strnstr(doub[i], set, ft_strlen(doub[i])))
 		{
-			doub[i] = ft_strtrim(doub[i], set);
+			hold = ft_strtrim(doub[i], set);
+			doub[i] = hold;
+			ft_sfree(hold);
 		}
 		i++;
 	}

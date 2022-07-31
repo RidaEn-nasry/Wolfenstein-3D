@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 23:43:53 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/26 22:23:16 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/29 22:41:05 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_map	*add_dist(t_map *map, double value, double ray_angle)
 
 	if (map->rndr->wall->len_arr == WIDTH)
 		map->rndr->wall->len_arr = 0;
-	i = map->rndr->wall->len_arr - 1;
+	i = map->rndr->wall->len_arr;
 	map->rndr->wall->arr_dist[i] = value;
 	map->rndr->wall->arr_angl[i] = ray_angle;
 	map->rndr->wall->len_arr += 1;
