@@ -8,7 +8,7 @@ The first was a Wolfenstein 3D clone using C and a minimal graphic library. Wolf
 
 # Usage:
 
-[install it](https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html#installation)) <br>
+If you don't have minilibx installed yet [install it](https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html#installation) <br>
 ```
 git clone https://github.com/RidaEn-nasry/Wolfenstein-3D && cd ./Wolfenstein-3D && make bonus && ./bonus/cub3d ./bonus/resources/maps/bonus_map.cub
 ```
