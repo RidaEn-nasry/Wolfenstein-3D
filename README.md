@@ -9,5 +9,5 @@ The first was a Wolfenstein 3D clone using C and a minimal graphic library. Wolf
 # Usage:
 
 ```
-git clone https://github.com/RidaEn-nasry/Wolfenstein-3D && cd ./Wolfenstein-3D && make bonus && ./cub3d
+git clone https://github.com/RidaEn-nasry/Wolfenstein-3D && cd ./Wolfenstein-3D && make bonus && ./bonus/cub3d
 ```
