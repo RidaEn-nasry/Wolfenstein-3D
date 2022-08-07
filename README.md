@@ -4,3 +4,11 @@ The first was a Wolfenstein 3D clone using C and a minimal graphic library. Wolf
 <img width="1916" alt="Screen Shot 2022-08-07 at 11 11 25 AM" src="https://user-images.githubusercontent.com/65143740/183286518-074e6b26-1b41-4f4a-9067-2930b22df2f7.png">
 
 <img width="1917" alt="Screen Shot 2022-08-07 at 11 11 57 AM" src="https://user-images.githubusercontent.com/65143740/183286536-373d851b-9bcc-43fe-84be-0ff57ae1e3e5.png">
+
+
+# Usage:
+
+```
+ $ git clone https://github.com/RidaEn-nasry/Wolfenstein-3D && cd ./Wolfenstein-3D && make bonus && ./cub3d
+ 
+```
